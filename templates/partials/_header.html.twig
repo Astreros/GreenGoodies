@@ -1,3 +1,16 @@
 <header class="header-container">
-    <div>HEADER</div>
+    <div class="logo-container">
+        <a href="{{ path('home.show') }}"><img src="{{ asset('icons/greengoodies_logo.png') }}" alt="Logo de Green Goodies"></a>
+    </div>
+
+    <nav class="header-nav-container">
+        <a href="{{ path('product.show') }}">Nos produits</a>
+        {% if is_granted("ROLE_USER") %}
+            <a href="{{ path('cart.show') }}">Mon panier</a>
+            <a href="{{ path('account.show') }}">Mon compte</a>
+            <a href="{{ path('app_logout') }}">Déconnexion</a>
+        {% else %}
+            <a href="{{ path('app_login') }}">Connexion</a>
+        {% endif %}
+    </nav>
 </header>
