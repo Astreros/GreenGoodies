@@ -13,6 +13,8 @@
     --textColorBlack: #000000;
 
     --btnColor: #565656;
+
+    --borderColor: #666666;
 }
 
 /* * */
@@ -25,7 +27,7 @@
 
 body {
     background-color: var(--backgroundColorLight);
-    max-width: 1440px;
+    max-width: 1200px;
     margin: auto;
 }
 
@@ -33,6 +35,12 @@ h1 {
     font-size: 64px;
     font-weight: 500;
     margin: 0;
+}
+
+h2 {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 40px;
 }
 
 p {
@@ -48,7 +56,6 @@ a {
 .header-container {
     max-height: 81px;
     padding: 31px 100px;
-
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -68,7 +75,6 @@ a {
     max-height: 81px;
     padding: 15px 100px;
     background-color: var(--backgroundColorWhite);
-
     display: flex;
     justify-content: flex-end;
 }
@@ -93,12 +99,90 @@ a {
 }
 
 .hero-header-img {
+    object-fit: contain;
     max-width: 50%;
     min-width: 50%;
 }
 
 .hero-header-img img {
+    object-fit: fill;
     max-height: 750px;
     width: 100%;
-    object-fit: cover;
+}
+
+/* Login form */
+
+.login-form-container {
+    display: flex;
+}
+
+.login-form-img {
+    max-width: 50%;
+    min-width: 50%;
+}
+
+.login-form-img img {
+    max-height: 1000%;
+    width: 100%;
+}
+
+.login-form-container form {
+    padding: 100px;
+    width: 50%;
+}
+
+.login-form-line {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.login-form-line label {
+    width: 100%;
+    margin-bottom: 10px;
+    padding-right: 10px;
+    color: var(--textColorLight);
+}
+
+.login-form-line input {
+    width: 100%;
+    height: 30px;
+    padding: 10px 5px;
+    border: 1px solid var(--borderColor);
+    background-color: var(--backgroundColorLight);
+}
+
+.login-form-line button {
+    width: 100%;
+    padding: 30px;
+    border: none;
+    border-radius: 0;
+    color: var(--textColorWhite);
+    background-color: var(--btnColor);
+    cursor: pointer;
+}
+
+.registration-link {
+    text-align: center;
+}
+
+.registration-link a {
+    text-decoration: underline;
+    color: var(--textColorLight);
+    font-size: 14px;
+}
+
+.error-form {
+    color: red;
+}
+
+@media (max-width: 900px) {
+    .login-form-img {
+        display: none;
+    }
+
+    .login-form-container form {
+        margin: auto;
+    }
 }
