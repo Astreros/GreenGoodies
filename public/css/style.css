@@ -43,8 +43,16 @@ h2 {
     margin-bottom: 40px;
 }
 
+h3 {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
 p {
     font-size: 14px;
+    margin: 5px 0;
+    color: var(--textColor);
 }
 
 a {
@@ -108,6 +116,77 @@ a {
     object-fit: fill;
     max-height: 750px;
     width: 100%;
+}
+
+@media (max-width: 900px) {
+    .hero-header-img {
+        display: none;
+    }
+
+    .hero-header-text  {
+        margin: 0;
+        padding: 20px;
+    }
+}
+
+/* Messages conviction & values */
+
+.conviction-message-container {
+    display: flex;
+    height: 650px;
+    background-color: #EBE3D3;
+}
+
+.values-message-container {
+    display: flex;
+    height: 650px;
+    background-color: #E8F0E3;
+}
+
+.conviction-message-img img {
+    max-height: 650px;
+    width: auto;
+}
+
+.values-message-img img {
+    max-height: 650px;
+    width: auto;
+}
+
+.conviction-message-text {
+    display: flex;
+    flex-direction: column;
+    align-self: flex-end;
+    padding: 20px;
+}
+
+.values-message-text {
+    display: flex;
+    flex-direction: column;
+    align-self: flex-end;
+    padding: 20px;
+}
+
+.separator {
+    width: 33%;
+}
+
+@media (max-width: 900px) {
+    .conviction-message-container, .values-message-container {
+        height: 300px;
+    }
+
+    .conviction-message-img, .values-message-img {
+        display: none;
+    }
+
+    .conviction-message-text, .values-message-text {
+        margin: auto 0;
+    }
+
+    .separator {
+        display: none;
+    }
 }
 
 /* Login form */
