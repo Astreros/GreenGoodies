@@ -12,11 +12,9 @@ class ProductController extends AbstractController
     public function index(int $id): Response
     {
         if ($id === -1) {
-            return $this->redirectToRoute('home.show');
+            return $this->render('product/index.html.twig');
         }
 
-        return $this->render('product/index.html.twig', [
-            'productID' => $id,
-        ]);
+        return $this->render('product/details.html.twig');
     }
 }
