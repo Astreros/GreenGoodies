@@ -364,6 +364,12 @@ a {
     border-bottom: none;
 }
 
+@media (max-width: 900px) {
+    .order-container, .api-container, .delete-account-container {
+        max-width: 90%;
+    }
+}
+
 /* User cart */
 
 .article-container {
