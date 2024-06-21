@@ -189,7 +189,7 @@ a {
     }
 }
 
-/* Login form */
+/* Login & Registration form */
 
 .login-form-container, .registration-form-container {
     display: flex;
@@ -297,4 +297,36 @@ a {
     .login-form-container form, .registration-form-container form {
         margin: auto;
     }
+}
+
+/* User account */
+
+.account-container {
+    background-color: var(--backgroundColor);
+    padding: 30px;
+}
+
+.account-title {
+    text-align: center;
+}
+
+.order-container, .api-container, .delete-account-container {
+    background-color: var(--backgroundColorLight);
+    max-width: 50%;
+    margin: 20px auto;
+    padding: 30px;
+}
+
+.order-container h3, .api-container h3 {
+    margin: 0 0 20px 0;
+}
+
+
+.delete-account-link a, .api-link a {
+    display: block;
+    text-align: center;
+    max-width: 100%;
+    padding: 30px;
+    color: var(--textColorWhite);
+    background-color: var(--btnColor);
 }

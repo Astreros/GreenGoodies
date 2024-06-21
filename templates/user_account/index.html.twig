@@ -3,6 +3,33 @@
 {% block title %}Green Goodies - Home{% endblock %}
 
 {% block body %}
-    <div>USER ACCOUNT !</div>
+    <div class="account-container">
+        <h2 class="account-title">Mon compte</h2>
+
+        <div class="order-container">
+            <h3>Mes commandes</h3>
+
+        </div>
+
+        <div class="api-container">
+            <h3>Mon accès API</h3>
+
+            <div class="api-link">
+                {% if app.user.apiActivated == true %}
+                    <a href="{{ path('api.disabled') }}">Désactiver mon accès API</a>
+                {% else %}
+                    <a href="{{ path('api.enabled') }}">Activer mon accès API</a>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="delete-account-container">
+            <div class="delete-account-link">
+                <a href="#">Supprimer mon compte</a>
+            </div>
+        </div>
+
+    </div>
+
 {% endblock %}
 
