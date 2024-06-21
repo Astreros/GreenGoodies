@@ -403,3 +403,9 @@ a {
 .price-article-cart {
     font-weight: 600;
 }
+
+@media (max-width: 900px) {
+    .article-container, .total-container, .confirm-order-container {
+        max-width: 90%;
+    }
+}
