@@ -301,12 +301,12 @@ a {
 
 /* User account */
 
-.account-container {
+.account-container, .cart-container {
     background-color: var(--backgroundColor);
     padding: 30px;
 }
 
-.account-title {
+.account-title, .cart-title {
     text-align: center;
 }
 
@@ -321,8 +321,31 @@ a {
     margin: 0 0 20px 0;
 }
 
-
 .delete-account-link a, .api-link a {
+    display: block;
+    text-align: center;
+    max-width: 100%;
+    padding: 30px;
+    color: var(--textColorWhite);
+    background-color: var(--btnColor);
+}
+
+/* User cart */
+
+.article-container {
+    background-color: var(--backgroundColorLight);
+    max-width: 50%;
+    margin: 20px auto 10px auto;
+    padding: 30px;
+}
+
+.confirm-order-container {
+    max-width: 50%;
+    margin: 10px auto;
+    padding: 30px;
+}
+
+.confirm-order-link a {
     display: block;
     text-align: center;
     max-width: 100%;
