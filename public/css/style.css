@@ -330,6 +330,40 @@ a {
     background-color: var(--btnColor);
 }
 
+
+.order-table {
+    border-collapse: collapse;
+    text-align: left;
+    width: 100%;
+    margin: auto;
+}
+
+.order-nb {
+    width: 30%;
+    height: 50px;
+}
+
+.order-price {
+    width: 20%;
+}
+
+.order-date {
+    width: 50%;
+}
+
+.order-nb.title, .order-price.title, .order-date.title {
+    color: var(--textColorLight);
+    margin-bottom: 10px;
+}
+
+.order-line {
+    border-bottom: 1px solid #CCCCCC;
+}
+
+.order-table tbody tr:last-child {
+    border-bottom: none;
+}
+
 /* User cart */
 
 .article-container {
