@@ -9,6 +9,8 @@
         </div>
 
         <form method="post">
+            <h2>Connexion</h2>
+
             {% if error %}
                 <div class="error-form">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
             {% endif %}
@@ -18,8 +20,6 @@
                     You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
                 </div>
             {% endif %}
-
-            <h2>Connexion</h2>
 
             <div class="login-form-line">
                 <label for="inputEmail">Adresse email</label>
@@ -38,7 +38,7 @@
             </div>
 
             <div class="registration-link">
-                <a href="#">Pas encore de compte ? S'inscrire</a>
+                <a href="{{ path('registration.show') }}">Pas encore de compte ? S'inscrire</a>
             </div>
         </form>
     </div>

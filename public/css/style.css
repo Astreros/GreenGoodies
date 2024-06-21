@@ -191,40 +191,40 @@ a {
 
 /* Login form */
 
-.login-form-container {
+.login-form-container, .registration-form-container {
     display: flex;
 }
 
-.login-form-img {
+.login-form-img, .registration-form-img {
     max-width: 50%;
     min-width: 50%;
 }
 
-.login-form-img img {
-    max-height: 1000%;
+.login-form-img img, .registration-form-img img {
+    max-height: 100%;
     width: 100%;
 }
 
-.login-form-container form {
+.login-form-container form, .registration-form-container form {
     padding: 100px;
     width: 50%;
 }
 
-.login-form-line {
+.login-form-line, .registration-form-line {
     display: flex;
     flex-direction: column;
     margin-bottom: 20px;
     width: 100%;
 }
 
-.login-form-line label {
+.login-form-line label, .registration-form-line label {
     width: 100%;
     margin-bottom: 10px;
     padding-right: 10px;
     color: var(--textColorLight);
 }
 
-.login-form-line input {
+.login-form-line input, .registration-form-line input {
     width: 100%;
     height: 30px;
     padding: 10px 5px;
@@ -232,7 +232,7 @@ a {
     background-color: var(--backgroundColorLight);
 }
 
-.login-form-line button {
+.login-form-line button, .registration-form-line button {
     width: 100%;
     padding: 30px;
     border: none;
@@ -242,26 +242,59 @@ a {
     cursor: pointer;
 }
 
-.registration-link {
+.registration-link, .login-link {
     text-align: center;
 }
 
-.registration-link a {
+.registration-link a, .login-link a {
     text-decoration: underline;
     color: var(--textColorLight);
     font-size: 14px;
 }
 
+.registration-form-line.cgu {
+    align-items: center;
+}
+
+.cgu {
+    flex-direction: row;
+}
+
+.cgu input {
+    width: 20px;
+}
+
+.cgu label {
+    padding: 0 10px;
+    margin: 0;
+    width: auto;
+}
+
+.required-message {
+    color: var(--textColorLight);
+    margin: -30px 0 30px 0;
+}
+
 .error-form {
+    margin-top: -20px;
+    height: 40px;
+}
+
+.error-form ul {
+    padding: 0;
+}
+
+.error-form ul li {
     color: red;
+    list-style: none;
 }
 
 @media (max-width: 900px) {
-    .login-form-img {
+    .login-form-img, .registration-form-img {
         display: none;
     }
 
-    .login-form-container form {
+    .login-form-container form, .registration-form-container form {
         margin: auto;
     }
 }
