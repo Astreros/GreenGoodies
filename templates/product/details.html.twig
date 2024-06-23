@@ -1,22 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Green Goodies - Nécessaire, déodorant Bio {% endblock %}
+{% block title %}Green Goodies - {{ article.name }} {% endblock %}
 
 {% block body %}
     <div class="product-container">
         <div class="product-img">
-            <img src="{{ asset('articles/15cd7d442e6e9686d8678f0c1236a01f.jpg') }}" alt="Nécessaire, déodorant Bio">
+            <img src="{{ asset(article.imagePath) }}" alt="{{ article.name }} ">
         </div>
 
         <div class="product-details">
-            <h2 class="product-details-title">Nécessaire, déodorant Bio</h2>
-            <p class="product-details-price">8,50€</p>
+            <h2 class="product-details-title">{{ article.name }} </h2>
+            <p class="product-details-price">{{ article.price }} </p>
 
             <p class="product-details-description-title">Description</p>
             <p class="product-details-description">
-                Déodorant Nécessaire, une formule révolutionnaire composée exclusivement d'ingrédients naturels pour une protection efficace et bienfaisante.<br><br>
-                Chaque flacon de 50 ml renferme le secret d'une fraîcheur longue durée, sans compromettre votre bien-être ni l'environnement. Conçu avec soin, ce déodorant allie le pouvoir antibactérien des extraits de plantes aux vertus apaisantes des huiles essentielles, assurant une sensation de confort toute la journée.<br><br>
-                Grâce à sa formule non irritante et respectueuse de votre peau, Nécessaire offre une alternative saine aux déodorants conventionnels, tout en préservant l'équilibre naturel de votre corps.
+                {{ article.longDescription }}
             </p>
 
             <div class="add-article-container">
