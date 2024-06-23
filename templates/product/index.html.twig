@@ -8,12 +8,12 @@
     <div class="product-card-container">
         {% for article in articles %}
             <div class="product-card">
-                <img src="{{ asset(article.imagePath) }}" alt="{{ asset(article.name) }}">
+                <img src="{{ asset(article.imagePath) }}" alt="{{ article.name }}">
                 <div class="product-info">
-                    <p class="product-info-title">{{ asset(article.name) }}</p>
-                    <p class="product-info-short-description">{{ asset(article.shortDescription) }}</p>
-                    <p class="product-info-price">{{ asset(article.price) }}</p>
-                    <a class="product-link" href="/article/{{ asset(article.id) }}">Voir le produit</a>
+                    <p class="product-info-title">{{ article.name }}</p>
+                    <p class="product-info-short-description">{{ article.shortDescription }}</p>
+                    <p class="product-info-price">{{ article.price }}</p>
+                    <a class="product-link" href="/article/{{ article.id }}">Voir le produit</a>
                 </div>
             </div>
         {% endfor %}
