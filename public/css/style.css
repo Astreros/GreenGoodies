@@ -6,6 +6,7 @@
     --backgroundColor: #F7F1EC;
     --backgroundColorLight: #FFFDF7;
     --backgroundColorWhite: #FFFFFF;
+    --backgroundColorBlack: #000000;
 
     --textColor: #333333;
     --textColorLight: #666666;
@@ -184,6 +185,10 @@ a {
     color: var(--textColorBlack);
 }
 
+.product-link:hover {
+    text-decoration: underline 1px black;
+}
+
 @media (max-width: 900px) {
     .product-card {
         width: 50%;
@@ -277,14 +282,14 @@ a {
     width: 50%;
 }
 
-.login-form-line, .registration-form-line {
+.login-form-line, .registration-form-line, .quantity-line {
     display: flex;
     flex-direction: column;
     margin-bottom: 20px;
     width: 100%;
 }
 
-.login-form-line label, .registration-form-line label {
+.login-form-line label, .registration-form-line label, .quantity-line label {
     width: 100%;
     margin-bottom: 10px;
     padding-right: 10px;
@@ -294,13 +299,14 @@ a {
 .login-form-line input, .registration-form-line input {
     width: 100%;
     height: 30px;
-    padding: 10px 5px;
+    padding: 10px 0 10px 1px;
     border: 1px solid var(--borderColor);
     background-color: var(--backgroundColorLight);
 }
 
-.login-form-line button, .registration-form-line button {
+.login-form-line button, .registration-form-line button, .add-article-container button {
     width: 100%;
+    margin: auto;
     padding: 30px;
     border: none;
     border-radius: 0;
@@ -317,6 +323,10 @@ a {
     text-decoration: underline;
     color: var(--textColorLight);
     font-size: 14px;
+}
+
+.login-form-line button:hover, .registration-form-line button:hover, .add-article-container button:hover {
+    background-color: var(--backgroundColorBlack);
 }
 
 .registration-form-line.cgu {
@@ -562,20 +572,28 @@ a {
     color: var(--textColorLight);
 }
 
-.add-article-container {
-    background-color: var(--backgroundColorLight);
-    max-width: 100%;
-    margin: auto;
-    padding: 30px 0;
-}
-
-.add-article-link a {
+.add-article-link button, .login-link button, .login-btn a {
+    margin-top: 20px;
+    text-decoration: none;
     display: block;
     text-align: center;
     max-width: 100%;
     padding: 30px;
     color: var(--textColorWhite);
     background-color: var(--btnColor);
+}
+
+.quantity-line {
+    margin: 40px 0 0 0;
+}
+
+.quantity-line input {
+    padding: 10px 10px 10px 5px;
+    width: 25%;
+}
+
+.add-article-link a:hover, .add-article-link a:hover, .login-btn a:hover {
+    background-color: var(--backgroundColorBlack);
 }
 
 @media (max-width: 900px) {

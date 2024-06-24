@@ -24,7 +24,7 @@
                 <div class="product-info">
                     <p class="product-info-title">{{ article.name }}</p>
                     <p class="product-info-short-description">{{ article.shortDescription }}</p>
-                    <p class="product-info-price">{{ article.price }}</p>
+                    <p class="product-info-price">{{ article.price|number_format(2, ',') }} €</p>
                     <a class="product-link" href="/article/{{ article.id }}">Voir le produit</a>
                 </div>
             </div>

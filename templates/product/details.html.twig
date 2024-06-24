@@ -9,19 +9,47 @@
         </div>
 
         <div class="product-details">
-            <h2 class="product-details-title">{{ article.name }} </h2>
-            <p class="product-details-price">{{ article.price }} </p>
+            <h2 class="product-details-title">{{ article.name }}</h2>
+            <p class="product-details-price">{{ article.price|number_format(2, ',') }} €</p>
 
             <p class="product-details-description-title">Description</p>
             <p class="product-details-description">
                 {{ article.longDescription }}
             </p>
 
-            <div class="add-article-container">
-                <div class="add-article-link">
-                    <a href="#">Ajouter au panier</a>
+            {% if is_granted("ROLE_USER") %}
+                {% if articleInCart == true %}
+                    <form action="{{ path('cart.update', {'id': article.id, 'quantity': 1}) }}" method="post">
+                        <div class="quantity-line">
+                            <label for="quantity">Quantité (max: {{ article.stock }})</label>
+                            <input type="number" id="quantity" name="quantity" value="{{ articleQuantity }}" min="0" max="{{ article.stock }}">
+                        </div>
+                        <div class="add-article-container">
+                            <div class="add-article-link">
+                                <button type="submit">Mettre à jour</button>
+                            </div>
+                        </div>
+                    </form>
+                {% else %}
+                    <form action="{{ path('cart.add', {'id': article.id, 'quantity': 1}) }}" method="post">
+                        <div class="quantity-line">
+                            <label for="quantity">Quantité (max: {{ article.stock }})</label>
+                            <input type="number" id="quantity" name="quantity" value="1" min="0" max="{{ article.stock }}">
+                        </div>
+                        <div class="add-article-container">
+                            <div class="add-article-link">
+                                <button type="submit">Ajouter au panier</button>
+                            </div>
+                        </div>
+                    </form>
+                {% endif %}
+            {% else %}
+                <div class="login-container">
+                    <div class="login-btn">
+                        <a href="{{ path('app_login') }}">Se connecter</a>
+                    </div>
                 </div>
-            </div>
+            {% endif %}
         </div>
     </div>
 {% endblock %}
