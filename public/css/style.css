@@ -623,8 +623,7 @@ a {
 }
 
 .add-article-link a:hover, .add-article-link a:hover, .login-btn a:hover {
-    /*background-color: var(--backgroundColorBlack);*/
-    background-color: red;
+    background-color: var(--backgroundColorBlack);
 }
 
 .add-article-link .not-available button:hover {
