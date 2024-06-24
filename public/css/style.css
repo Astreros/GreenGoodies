@@ -407,6 +407,10 @@ a {
     background-color: var(--btnColor);
 }
 
+.delete-account-link a:hover, .api-link a:hover {
+    background-color: var(--backgroundColorBlack);
+}
+
 .order-table {
     border-collapse: collapse;
     text-align: left;
@@ -490,6 +494,10 @@ a {
     background-color: var(--btnColor);
 }
 
+.confirm-order-link a:hover {
+    background-color: var(--backgroundColorBlack);
+}
+
 .card-article-cart {
     display: flex;
     margin-bottom: 30px;
@@ -520,8 +528,30 @@ a {
     font-weight: 600;
 }
 
+.cart-empty-container {
+    width: 50%;
+    padding: 0;
+    margin: auto;
+}
+
+.cart-empty a {
+    color: var(--textColorLight);
+    font-size: 17px;
+}
+
+.cart-empty-container a:hover {
+    text-decoration: underline 1px var(--textColorLight);
+}
+
+.cart-empty-message {
+    color: var(--textColorLight);
+    font-size: 17px;
+    text-align: center;
+    padding: 30px;
+}
+
 @media (max-width: 900px) {
-    .article-container, .total-container, .confirm-order-container {
+    .article-container, .total-container, .confirm-order-container, .cart-empty-container {
         max-width: 90%;
     }
 }
@@ -593,7 +623,18 @@ a {
 }
 
 .add-article-link a:hover, .add-article-link a:hover, .login-btn a:hover {
-    background-color: var(--backgroundColorBlack);
+    /*background-color: var(--backgroundColorBlack);*/
+    background-color: red;
+}
+
+.add-article-link .not-available button:hover {
+    cursor: not-allowed;
+    background-color: var(--textColorLight) !important;
+}
+
+#not-available-btn {
+    cursor: not-allowed;
+    background-color: var(--textColorLight);
 }
 
 @media (max-width: 900px) {

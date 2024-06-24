@@ -24,12 +24,29 @@ class UserCartController extends AbstractController
     #[IsGranted("ROLE_USER")]
     public function index(): Response
     {
-        return $this->render('user_cart/index.html.twig', ['controller_name' => 'UserCartController',]);
+        $user = $this->getUser();
+
+        if (!$user instanceof User) {
+            $this->redirectToRoute('app_login');
+        }
+
+        $cart = $user->getCart();
+
+        $totalPrice = 0;
+
+        foreach ($cart->getCartItem() as $cartItem) {
+            $totalPrice += $cartItem->getArticle()->getPrice() * $cartItem->getQuantity();
+        }
+
+        return $this->render('user_cart/index.html.twig', [
+            'cart' => $cart,
+            'totalPrice' => $totalPrice,
+        ]);
     }
 
     #[Route('/panier/add/{id}', name: 'cart.add')]
     #[IsGranted("ROLE_USER")]
-    public function addItemToCart(Request $request, int $id, int $quantity): Response
+    public function addItemToCart(Request $request, int $id): Response
     {
         $user = $this->getUser();
 
@@ -47,9 +64,12 @@ class UserCartController extends AbstractController
 
         $article = $this->articleRepository->find($id);
 
+        $userQuantity = $request->request->get('quantity');
+        $quantityChecked = $this->checkQuantity($id, $userQuantity);
+
         $cartItem = new CartItem();
         $cartItem->setArticle($article);
-        $cartItem->setQuantity($quantity);
+        $cartItem->setQuantity($quantityChecked);
         $cartItem->setCart($cart);
 
         $cart->addCartItem($cartItem);
@@ -83,11 +103,14 @@ class UserCartController extends AbstractController
         }
 
         $userQuantity = $request->request->get('quantity');
+
         $quantityChecked = $this->checkQuantity($id, $userQuantity);
+
+        $cartItemToUpdate = null;
 
         foreach ($cart->getCartItem() as $cartItem) {
             $itemArticle = $cartItem->getArticle();
-            // Item du panier non valide, supprimer l'élément non valide
+            // Item du panier non valide, supprime l'élément
             if($itemArticle === null) {
                 $cart->removeCartItem($cartItem);
                 $this->entityManagerInterface->remove($cartItem);
@@ -96,18 +119,48 @@ class UserCartController extends AbstractController
             }
 
             if ($itemArticle->getId() === $article->getId()) {
-                $cartItem->setQuantity($quantityChecked);
-
-                $this->entityManagerInterface->persist($cartItem);
-                $this->entityManagerInterface->flush();
-
+                $cartItemToUpdate = $cartItem;
                 break;
             }
+        }
+
+        if ($cartItemToUpdate !== null) {
+            if ($quantityChecked === 0) {
+                $cart->removeCartItem($cartItemToUpdate);
+                $this->entityManagerInterface->remove($cartItemToUpdate);
+            } else {
+                $cartItemToUpdate->setQuantity($quantityChecked);
+                $this->entityManagerInterface->persist($cartItemToUpdate);
+            }
+            $this->entityManagerInterface->flush();
         }
 
         return $this->redirectToRoute('cart.show');
     }
 
+    #[Route('/panier/empty', name: 'cart.empty')]
+    #[IsGranted("ROLE_USER")]
+    public function emptyCart(): Response
+    {
+        $user = $this->getUser();
+        if (!$user instanceof User) {
+            throw $this->createNotFoundException('User not found');
+        }
+
+        $cart = $user->getCart();
+        if (!$cart) {
+            throw $this->createNotFoundException('Cart not found');
+        }
+
+        foreach ($cart->getCartItem() as $cartItem) {
+            $cart->removeCartItem($cartItem);
+            $this->entityManagerInterface->remove($cartItem);
+        }
+
+        $this->entityManagerInterface->flush();
+
+        return $this->redirectToRoute('cart.show');
+    }
 
     public function checkQuantity(int $id, int $quantityUser): int
     {

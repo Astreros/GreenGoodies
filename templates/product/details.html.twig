@@ -31,16 +31,25 @@
                         </div>
                     </form>
                 {% else %}
+                    {% if article.stock > 1 %}
                     <form action="{{ path('cart.add', {'id': article.id, 'quantity': 1}) }}" method="post">
                         <div class="quantity-line">
                             <label for="quantity">Quantité (max: {{ article.stock }})</label>
                             <input type="number" id="quantity" name="quantity" value="1" min="0" max="{{ article.stock }}">
                         </div>
+
                         <div class="add-article-container">
                             <div class="add-article-link">
                                 <button type="submit">Ajouter au panier</button>
                             </div>
                         </div>
+                    {%  else %}
+                        <div class="add-article-container not-available">
+                            <div class="add-article-link not-available">
+                                <button id="not-available-btn" type="button">Produit indisponible</button>
+                            </div>
+                        </div>
+                    {% endif %}
                     </form>
                 {% endif %}
             {% else %}
