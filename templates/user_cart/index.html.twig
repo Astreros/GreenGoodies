@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Green Goodies - Home{% endblock %}
+{% block title %}Green Goodies - Panier{% endblock %}
 
 {% block body %}
     <div class="cart-container">
@@ -37,7 +37,7 @@
 
             <div class="confirm-order-container">
                 <div class="confirm-order-link">
-                    <a href="#">Valider la commande</a>
+                    <a href="{{ path('order.create') }}">Valider la commande</a>
                 </div>
             </div>
         {% endif %}
