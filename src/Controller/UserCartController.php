@@ -162,7 +162,7 @@ class UserCartController extends AbstractController
         return $this->redirectToRoute('cart.show');
     }
 
-    public function checkQuantity(int $id, int $quantityUser): int
+    private function checkQuantity(int $id, int $quantityUser): int
     {
         $article = $this->articleRepository->find($id);
 

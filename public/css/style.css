@@ -60,6 +60,12 @@ a {
     text-decoration: none;
 }
 
+.alert.alert-warning {
+    margin: 20px 0;
+    text-align: center;
+    color: red;
+}
+
 /* Header */
 
 .header-container {

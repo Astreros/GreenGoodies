@@ -13,6 +13,13 @@
         {% endif %}
 
         <div class="article-container">
+
+            {% for message in app.flashes('warning') %}
+                <div class="alert alert-warning">
+                    {{ message }}
+                </div>
+            {% endfor %}
+
             {% if cart is not null and cart.cartItem is not empty %}
                 {% for cartItem in cart.cartItem %}
                     <div class="card-article-cart">

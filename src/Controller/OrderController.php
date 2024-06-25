@@ -31,6 +31,12 @@ class OrderController extends AbstractController
             throw $this->createNotFoundException('Cart not found');
         }
 
+        if ($this->checkQuantity($cart)) {
+            $this->addFlash('warning', 'Certains articles ont une quantité insuffisante en stock. Votre panier a été mis à jours en conséquence. Vérifier votre panier avant de le valider.');
+            return $this->redirectToRoute('cart.show');
+        }
+
+
         $now = new \DateTime();
         $nbOrder = $now->getTimestamp() . $user->getId();
 
@@ -41,7 +47,8 @@ class OrderController extends AbstractController
         $order->setCreatedAt(new \DateTimeImmutable());
 
         $this->entityManagerInterface->persist($order);
-        $this->entityManagerInterface->flush();
+
+        $totalPrice = 0;
 
         foreach ($cart->getCartItem() as $cartItem) {
             $article = $cartItem->getArticle();
@@ -59,7 +66,13 @@ class OrderController extends AbstractController
 
             $article->setStock($article->getStock() - $cartItem->getQuantity());
             $this->entityManagerInterface->persist($article);
+
+            $totalPrice += $article->getPrice() * $cartItem->getQuantity();
         }
+
+        $order->setTotalPrice($totalPrice);
+
+        $this->entityManagerInterface->persist($order);
 
         foreach ($cart->getCartItem() as $cartItem) {
             $cart->removeCartItem($cartItem);
@@ -69,5 +82,28 @@ class OrderController extends AbstractController
         $this->entityManagerInterface->flush();
 
         return $this->redirectToRoute('account.show');
+    }
+
+    private function checkQuantity(Cart $cart): bool
+    {
+        $lowStockAlert = false;
+
+        foreach ($cart->getCartItem() as $cartItem) {
+            $article = $cartItem->getArticle();
+            if (!$article instanceof Article) {
+                throw $this->createNotFoundException('Article not found');
+            }
+
+            if ($article->getStock() < $cartItem->getQuantity()) {
+                $cartItem->setQuantity($article->getStock());
+                $this->entityManagerInterface->persist($cartItem);
+
+                $lowStockAlert = true;
+            }
+        }
+
+        $this->entityManagerInterface->flush();
+
+        return $lowStockAlert;
     }
 }

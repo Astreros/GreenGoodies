@@ -25,7 +25,7 @@
                         <tr class="order-line">
                             <td class="order-nb">{{ order.nbOrder }}</td>
                             <td class="order-date">{{ order.createdAt|date("d/m/Y") }}</td>
-                            <td class="order-price">185,50€</td>
+                            <td class="order-price">{{ order.totalPrice|number_format(2, ',') }}</td>
                         </tr>
                     {% endfor %}
                     </tbody>

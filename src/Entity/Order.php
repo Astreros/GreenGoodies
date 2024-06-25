@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\OrderRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: OrderRepository::class)]
@@ -31,8 +32,11 @@ class Order
     /**
      * @var Collection<int, OrderItem>
      */
-    #[ORM\OneToMany(targetEntity: OrderItem::class, mappedBy: 'orders')]
+    #[ORM\OneToMany(targetEntity: OrderItem::class, mappedBy: 'orders', cascade: ['remove'], orphanRemoval: true)]
     private Collection $orderItems;
+
+    #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
+    private ?string $totalPrice = null;
 
     public function __construct()
     {
@@ -118,6 +122,18 @@ class Order
                 $orderItem->setOrders(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getTotalPrice(): ?string
+    {
+        return $this->totalPrice;
+    }
+
+    public function setTotalPrice(string $totalPrice): static
+    {
+        $this->totalPrice = $totalPrice;
 
         return $this;
     }
