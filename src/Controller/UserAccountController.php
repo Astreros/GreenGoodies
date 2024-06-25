@@ -25,7 +25,7 @@ class UserAccountController extends AbstractController
     {
         $user = $this->getUser();
 
-        $orders = $this->orderRepository->findBy(['user' => $user]);
+        $orders = $this->orderRepository->findBy(['user' => $user], ['createdAt' => 'ASC']);
 
         if (empty($orders)) {
             $orders = false;
