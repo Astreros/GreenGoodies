@@ -32,7 +32,8 @@ class Order
     /**
      * @var Collection<int, OrderItem>
      */
-    #[ORM\OneToMany(targetEntity: OrderItem::class, mappedBy: 'orders', cascade: ['remove'], orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: OrderItem::class, mappedBy: 'orders')]
+    #[ORM\JoinColumn(onDelete:"CASCADE")]
     private Collection $orderItems;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
