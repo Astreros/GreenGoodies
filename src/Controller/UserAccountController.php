@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
+use App\Repository\OrderRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -12,7 +14,8 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 class UserAccountController extends AbstractController
 {
     public function __construct(private readonly EntityManagerInterface $entityManager,
-                                private readonly UserRepository $userRepository)
+                                private readonly UserRepository $userRepository,
+                                private readonly OrderRepository $orderRepository)
     {
     }
 
@@ -20,8 +23,16 @@ class UserAccountController extends AbstractController
     #[IsGranted("ROLE_USER")]
     public function index(): Response
     {
+        $user = $this->getUser();
+
+        $orders = $this->orderRepository->findBy(['user' => $user]);
+
+        if (empty($orders)) {
+            $orders = false;
+        }
+
         return $this->render('user_account/index.html.twig', [
-            'controller_name' => 'UserAccountController',
+            'orders' => $orders,
         ]);
     }
 
@@ -29,10 +40,10 @@ class UserAccountController extends AbstractController
     #[IsGranted("ROLE_USER")]
     public function enabledApiAccess(): Response
     {
-        $user = $this->userRepository->find($this->getUser()->getId());
+        $user = $this->getUser();
 
-        if (!$user) {
-            return $this->redirectToRoute('account.show');
+        if (!$user instanceof User) {
+            return $this->redirectToRoute('app_login');
         }
 
         $user->setApiActivated(true);

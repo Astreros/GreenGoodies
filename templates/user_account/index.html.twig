@@ -9,15 +9,18 @@
         <div class="order-container">
             <h3>Mes commandes</h3>
 
-            <table class="order-table">
-                <thead>
+            {% if orders == false %}
+                <p class="cart-empty-message">Vous n'avez aucune commande à afficher.</p>
+            {% else %}
+                <table class="order-table">
+                    <thead>
                     <tr>
                         <th class="order-nb title">N°</th>
                         <th class="order-date title">Date</th>
                         <th class="order-price title">Prix</th>
                     </tr>
-                </thead>
-                <tbody>
+                    </thead>
+                    <tbody>
                     <tr class="order-line">
                         <td class="order-nb">01</td>
                         <td class="order-date">01/01/2024</td>
@@ -43,8 +46,9 @@
                         <td class="order-date">05/05/2024</td>
                         <td class="order-price">185,50€</td>
                     </tr>
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            {% endif %}
         </div>
 
         <div class="api-container">
