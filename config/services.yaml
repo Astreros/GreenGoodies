@@ -20,6 +20,23 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
 
+#    TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+#    lexik_jwt_authentication.jwt_token_authenticator:
+#        class: Lexik\Bundle\JWTAuthenticationBundle\Security\Authenticator\JWTAuthenticator
+#        arguments:
+#            - '@lexik_jwt_authentication.jwt_manager'
+#            - '@lexik_jwt_authentication.encoder'
+#            - null
+#            - '@lexik_jwt_authentication.user_provider'
+#            - '@security.password_encoder'
+#            - '@security.helper'
+#            - '@?logger'
+#            - [ '@event_dispatcher' ]
+#        tags:
+#            - { name: 'monolog.logger', channel: 'security' }
+#            - { name: 'security.authenticator.listener' }
+#    TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
     App\Services\UtilsExtension:
