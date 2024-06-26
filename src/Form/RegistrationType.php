@@ -20,6 +20,7 @@ class RegistrationType extends AbstractType
         $builder
             ->add('email', EmailType::class, [
                 'label' => 'Adresse email',
+                'invalid_message' => 'L\'adresse email n\'est pas valide',
             ])
 //            ->add('roles')
             ->add('password', RepeatedType::class, [
@@ -32,9 +33,11 @@ class RegistrationType extends AbstractType
             ])
             ->add('LastName', TextType::class, [
                 'label' => 'Nom',
+                'invalid_message' => 'L\'adresse nom n\'est pas valide',
             ])
             ->add('FirstName', TextType::class, [
-                'label' => 'Prénom'
+                'label' => 'Prénom',
+                'invalid_message' => 'L\'adresse prenom n\'est pas valide',
             ])
 //            ->add('City')
 //            ->add('Street')

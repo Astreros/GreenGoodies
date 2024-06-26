@@ -21,6 +21,7 @@ class OrderItem
     private ?string $unitPrice = null;
 
     #[ORM\ManyToOne(inversedBy: 'orderItems')]
+    #[ORM\JoinColumn(nullable: false, onDelete:"CASCADE")]
     private ?Order $orders = null;
 
     #[ORM\ManyToOne]

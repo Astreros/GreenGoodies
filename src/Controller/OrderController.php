@@ -81,6 +81,8 @@ class OrderController extends AbstractController
 
         $this->entityManagerInterface->flush();
 
+        $this->addFlash('success', 'Votre commande a bien été validée.');
+
         return $this->redirectToRoute('account.show');
     }
 

@@ -32,6 +32,13 @@ class UserCartController extends AbstractController
 
         $cart = $user->getCart();
 
+        if (!$cart) {
+            throw $this->createNotFoundException('Cart not found');
+        }
+
+        $this->entityManagerInterface->persist($cart);
+        $this->entityManagerInterface->flush();
+
         $totalPrice = 0;
 
         foreach ($cart->getCartItem() as $cartItem) {
@@ -57,9 +64,7 @@ class UserCartController extends AbstractController
         $cart = $user->getCart();
 
         if (!$cart) {
-            $cart = new Cart();
-            $cart->setCreatedAt(new \DateTimeImmutable());
-            $user->setCart($cart);
+            throw $this->createNotFoundException('Cart not found');
         }
 
         $article = $this->articleRepository->find($id);

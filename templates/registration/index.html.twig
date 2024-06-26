@@ -13,45 +13,52 @@
         <h2>Inscription</h2>
         <p class="required-message">Tous les champs sont obligatoires.</p>
 
-        <div class="error-form">
-            {{ form_errors(registrationForm.LastName) }}
-            {{ form_errors(registrationForm.FirstName) }}
-            {{ form_errors(registrationForm.email) }}
-            {{ form_errors(registrationForm.password.first) }}
-            {{ form_errors(registrationForm.password.second) }}
-            {{ form_errors(registrationForm.CguAccepted) }}
-        </div>
-
         <div class="registration-form-line">
             {{ form_label(registrationForm.LastName) }}
             {{ form_widget(registrationForm.LastName) }}
+            <div class="error-form">
+                {{ form_errors(registrationForm.LastName) }}
+            </div>
         </div>
 
         <div class="registration-form-line">
             {{ form_label(registrationForm.FirstName) }}
             {{ form_widget(registrationForm.FirstName) }}
+            <div class="error-form">
+                {{ form_errors(registrationForm.FirstName) }}
+            </div>
         </div>
 
         <div class="registration-form-line">
             {{ form_label(registrationForm.email) }}
             {{ form_widget(registrationForm.email) }}
+            <div class="error-form">
+                {{ form_errors(registrationForm.email) }}
+            </div>
         </div>
 
         <div class="registration-form-line">
             {{ form_label(registrationForm.password.first) }}
             {{ form_widget(registrationForm.password.first) }}
-
+            <div class="error-form">
+                {{ form_errors(registrationForm.password.first) }}
+            </div>
         </div>
 
         <div class="registration-form-line">
             {{ form_label(registrationForm.password.second) }}
             {{ form_widget(registrationForm.password.second) }}
-
+            <div class="error-form">
+                {{ form_errors(registrationForm.password.second) }}
+            </div>
         </div>
 
         <div class="registration-form-line cgu">
             {{ form_widget(registrationForm.CguAccepted) }}
             {{ form_label(registrationForm.CguAccepted) }}
+            <div class="error-form">
+                {{ form_errors(registrationForm.CguAccepted) }}
+            </div>
         </div>
 
         <div class="registration-form-line">

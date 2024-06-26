@@ -6,6 +6,12 @@
     <div class="account-container">
         <h2 class="account-title">Mon compte</h2>
 
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+
         <div class="order-container">
             <h3>Mes commandes</h3>
 
@@ -25,7 +31,7 @@
                         <tr class="order-line">
                             <td class="order-nb">{{ order.nbOrder }}</td>
                             <td class="order-date">{{ order.createdAt|date("d/m/Y") }}</td>
-                            <td class="order-price">{{ order.totalPrice|number_format(2, ',') }}</td>
+                            <td class="order-price">{{ order.totalPrice|number_format(2, ',') }} €</td>
                         </tr>
                     {% endfor %}
                     </tbody>
@@ -47,7 +53,7 @@
 
         <div class="delete-account-container" onclick="return confirm('Êtes-vous sûr de vouloir supprimer votre compte Green Goodies ? Toutes vos données, votre panier et l\'ensemble de vos commandes seront définitivement supprimés.')">
             <div class="delete-account-link">
-                <a href="#">Supprimer mon compte</a>
+                <a href="{{ path('account.delete') }}">Supprimer mon compte</a>
             </div>
         </div>
 

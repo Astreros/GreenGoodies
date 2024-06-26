@@ -7,9 +7,12 @@ use App\Repository\OrderRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class UserAccountController extends AbstractController
 {
@@ -68,5 +71,24 @@ class UserAccountController extends AbstractController
         $this->entityManager->flush();
 
         return $this->redirectToRoute('account.show');
+    }
+
+    #[Route('/account/delete', name: 'account.delete')]
+    #[IsGranted("ROLE_USER")]
+    public function deleteAccount(Request $request): Response
+    {
+        $user = $this->getUser();
+
+        if (!$user instanceof User) {
+            throw $this->createNotFoundException('User not found');
+        }
+
+        $session = new Session();
+        $session->invalidate();
+
+        $this->entityManager->remove($user);
+        $this->entityManager->flush();
+
+        return $this->redirectToRoute('home.show');
     }
 }

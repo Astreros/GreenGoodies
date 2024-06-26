@@ -27,13 +27,14 @@ class Order
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\ManyToOne(inversedBy: 'orders')]
+    #[ORM\JoinColumn(nullable: false, onDelete:"CASCADE")]
     private ?User $user = null;
 
     /**
      * @var Collection<int, OrderItem>
      */
     #[ORM\OneToMany(targetEntity: OrderItem::class, mappedBy: 'orders')]
-    #[ORM\JoinColumn(onDelete:"CASCADE")]
+    #[ORM\JoinColumn(nullable: false, onDelete:"CASCADE")]
     private Collection $orderItems;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]

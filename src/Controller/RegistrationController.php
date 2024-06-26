@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Cart;
 use App\Entity\User;
 use App\Form\RegistrationType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -28,8 +29,14 @@ class RegistrationController extends AbstractController
 
         if ($registrationForm->isSubmitted() && $registrationForm->isValid()) {
             $user->setApiActivated(false)->setRegistrationDate(new \DateTime())->setRoles(['ROLE_USER']);
+
+            $cart = new Cart();
+            $cart->setCreatedAt(new \DateTimeImmutable());
+            $user->setCart($cart);
+
             $user->setPassword($this->userPasswordHasher->hashPassword($user, $user->getPassword()));
 
+            $this->entityManager->persist($cart);
             $this->entityManager->persist($user);
             $this->entityManager->flush();
 

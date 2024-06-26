@@ -21,8 +21,7 @@ class Cart
     /**
      * @var Collection<int, CartItem>
      */
-    #[ORM\OneToMany(targetEntity: CartItem::class, mappedBy: 'cart')]
-    #[ORM\JoinColumn(onDelete:"CASCADE")]
+    #[ORM\OneToMany(targetEntity: CartItem::class, mappedBy: 'cart', cascade: ['remove'])]
     private Collection $cartItem;
 
     public function __construct()

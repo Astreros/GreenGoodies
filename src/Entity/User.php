@@ -23,7 +23,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 180)]
-    #[Assert\NotBlank]
+    #[Assert\NotBlank(message: "Ce champ est obligatoire")]
+    #[Assert\Email(message: "Cette adresse email n'est pas valide")]
     private ?string $email = null;
 
     /**
@@ -36,12 +37,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      */
     #[ORM\Column]
+    #[Assert\NotBlank(message: "Ce champ est obligatoire")]
+    #[Assert\Length(min: 1, minMessage: "Votre mot de passe doit avoir au moins {{ limit }} caractères alphanumériques.")]
+    #[Assert\Regex(pattern: "/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{16,}$/", message: "Votre mot de passe doit comporter au moins 16 caractères alphanumérique dont une minuscule, une majuscule, un chiffre et un caractère spécial.")]
     private ?string $password = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "Ce champ est obligatoire")]
+    #[Assert\Length(min: 1, max: 100 ,minMessage: "Votre Nom doit avoir au moins {{ limit }} caractères.", maxMessage: "Votre Nom doit faire {{ limit }} caractères au maximum.")]
     private ?string $LastName = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "Ce champ est obligatoire")]
+    #[Assert\Length(min: 1, max: 100 ,minMessage: "Votre Prénom doit avoir au moins {{ limit }} caractères.", maxMessage: "Votre Prénom doit faire {{ limit }} caractères au maximum.")]
     private ?string $FirstName = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -62,13 +70,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?bool $CguAccepted = null;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(targetEntity: Cart::class, cascade: ["remove"])]
+    #[ORM\JoinColumn(nullable: false, onDelete:"CASCADE")]
     private ?Cart $cart = null;
 
     /**
      * @var Collection<int, Order>
      */
     #[ORM\OneToMany(targetEntity: Order::class, mappedBy: 'user')]
+    #[ORM\JoinColumn(nullable: false, onDelete:"CASCADE")]
     private Collection $orders;
 
     public function __construct()
