@@ -13,7 +13,6 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-        #        TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         login:
             pattern: ^/api/login$
             stateless: true
@@ -25,7 +24,6 @@ security:
             pattern: ^/api
             stateless: true
             jwt: ~
-        #        TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         main:
             lazy: true
             provider: app_user_provider
