@@ -22,15 +22,11 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
-    App\Services\UtilsExtension:
-        tags:
-            - { name: twig.extension }
+#    App\Services\UtilsExtension:
+#        tags:
+#            - { name: twig.extension }
 
     # TODO Custom API authenticator
-#    app.custom_authenticator:
-#        class: App\Security\APIAuthenticator
-#        parent: lexik_jwt_authentication.security.jwt_authenticator
-#
-#    # Alias for JWTTokenManagerInterface
-#    Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface:
-#        alias: lexik_jwt_authentication.jwt_manager
+    # !Important!
+    App\Security\ApiSecurityController:
+        tags: [ 'security.authentication.success_handler' ]

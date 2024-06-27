@@ -18,18 +18,13 @@ security:
             stateless: true
             json_login:
                 check_path: /api/login
-                success_handler: lexik_jwt_authentication.handler.authentication_success
+                # Configuration personnalisée en cas de succès
+                success_handler: App\Security\ApiSecurityController
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
         api:
             pattern: ^/api
             stateless: true
             jwt: ~
-#            jwt:
-#                # TODO Custom API authenticator
-#                authenticator: App\Security\APIAuthenticator
-#            provider: app_user_provider
-#            custom_authenticator: App\Security\APIAuthenticator
-#            entry_point: lexik_jwt_authentication.jwt_authenticator
         main:
             lazy: true
             provider: app_user_provider
