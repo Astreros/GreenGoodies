@@ -24,6 +24,12 @@ security:
             pattern: ^/api
             stateless: true
             jwt: ~
+#            jwt:
+#                # TODO Custom API authenticator
+#                authenticator: App\Security\APIAuthenticator
+#            provider: app_user_provider
+#            custom_authenticator: App\Security\APIAuthenticator
+#            entry_point: lexik_jwt_authentication.jwt_authenticator
         main:
             lazy: true
             provider: app_user_provider
@@ -38,8 +44,6 @@ security:
 
             # https://symfony.com/doc/current/security/impersonating_user.html
             # switch_user: true
-
-
 
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used

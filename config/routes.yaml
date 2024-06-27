@@ -6,4 +6,9 @@ controllers:
 #    TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 api_login_check:
     path: /api/login
-    methods: [POST]
+    methods: [POST, GET]
+
+#api_area:
+#    path: /api
+#    methods: ['GET', 'POST', 'PUT', 'DELETE']
+#    controller: App\Controller\ApiSecurityController::index
