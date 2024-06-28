@@ -13,20 +13,23 @@ class ExceptionSubscriber implements EventSubscriberInterface
     public function onKernelException(ExceptionEvent $event): void
     {
         $exception = $event->getThrowable();
+        $request = $event->getRequest();
 
-        if ($exception instanceof HttpException) {
-            $data = [
-                'status' => $exception->getStatusCode(),
-                'message' => $exception->getMessage(),
-            ];
+        // TODO On génère des erreurs au format JSON seulement pour l'API
+        if (str_starts_with($request->getPathInfo(), '/api/')) {
+            if ($exception instanceof HttpException) {
+                $data = [
+                    'status' => $exception->getStatusCode(),
+                    'message' => $exception->getMessage(),
+                ];
 
-            $event->setResponse(new JsonResponse($data));
-        } else {
-            $data = [
-                'status' => 500, // Le status n'existe pas, ce n'est pas une exception HTTP.
-                'message' => $exception->getMessage(),
-            ];
+            } else {
+                $data = [
+                    'status' => 500, // Le status n'existe pas, ce n'est pas une exception HTTP.
+                    'message' => $exception->getMessage(),
+                ];
 
+            }
             $event->setResponse(new JsonResponse($data));
         }
     }
