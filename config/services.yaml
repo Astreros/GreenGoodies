@@ -26,7 +26,6 @@ services:
 #        tags:
 #            - { name: twig.extension }
 
-    # TODO Custom API authenticator
     # !Important!
     App\Security\ApiSecurityController:
         tags: [ 'security.authentication.success_handler' ]

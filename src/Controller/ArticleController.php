@@ -56,7 +56,7 @@ class ArticleController extends AbstractController
         $user = $this->getUser();
 
         if (!$user instanceof User) {
-            $this->redirectToRoute('app_login');
+            throw $this->createNotFoundException('User not found');
         }
 
         $cart = $user->getCart();
