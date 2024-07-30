@@ -10,12 +10,22 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 class ExceptionSubscriber implements EventSubscriberInterface
 {
+    /**
+     * Gère les exceptions pour les routes API.
+     *
+     * Cette méthode est déclenchée chaque fois qu'une exception est lancée dans l'application.
+     * Elle vérifie si le chemin de la requête commence par '/api/' et formate l'exception
+     * en une réponse JSON avec le code de statut et le message appropriés.
+     *
+     * @param ExceptionEvent $event L'objet événement contenant les détails de l'exception.
+     *
+     * @return void
+     */
     public function onKernelException(ExceptionEvent $event): void
     {
         $exception = $event->getThrowable();
         $request = $event->getRequest();
 
-        // TODO On génère des erreurs au format JSON seulement pour l'API
         if (str_starts_with($request->getPathInfo(), '/api/')) {
             if ($exception instanceof HttpException) {
                 $data = [
@@ -25,7 +35,7 @@ class ExceptionSubscriber implements EventSubscriberInterface
 
             } else {
                 $data = [
-                    'status' => 500, // Le status n'existe pas, ce n'est pas une exception HTTP.
+                    'status' => 500,
                     'message' => $exception->getMessage(),
                 ];
 

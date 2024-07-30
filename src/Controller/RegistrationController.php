@@ -50,8 +50,11 @@ class RegistrationController extends AbstractController
             $this->entityManager->flush();
 
             // Connecte automatiquement l'utilisateur après son inscription
+            // Création d'un jeton de sécurité pour l'utilisateur, avec le fournisseur de sécurité 'main' et avec les rôles de l'utilisateur
             $token = new UsernamePasswordToken($user, 'main', $user->getRoles());
+            // Enregistrement du token dans le 'token_storage' du conteneur de service Symfony (authentifie l'utilisateur pour la session en cours)
             $this->container->get('security.token_storage')->setToken($token);
+            // Sauvegarde du token dans la session utilisateur (permet de maintenir l'authentification lors des requêtes suivantes)
             $this->requestStack->getSession()->set('_security_main', serialize($token));
 
             return $this->redirectToRoute('app_login');
