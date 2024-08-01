@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Article;
+use App\Entity\Cart;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -20,12 +21,18 @@ class AppFixtures extends Fixture
      */
     public function load(ObjectManager $manager): void
     {
+        // Création panier
+        $cart = new Cart();
+        $cart->setCreatedAt(new \DateTimeImmutable());
+        $manager->persist($cart);
+
         // Création d'un utilisateur ROLE_USER
         $user = new User();
         $user->setEmail('user@greengoodies.com')->setFirstName('john')->setLastName('Doe');
         $user->setApiActivated(false)->setCguAccepted(true);
         $user->setRoles(['ROLE_USER']);
         $user->setRegistrationDate(new \DateTime());
+        $user->setCart($cart);
         $user->setPassword($this->userPasswordHasher->hashPassword($user,'password'));
         $manager->persist($user);
 
