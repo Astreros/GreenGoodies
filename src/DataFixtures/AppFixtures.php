@@ -69,15 +69,15 @@ class AppFixtures extends Fixture
         ];
 
         $articlesImagePath = [
-            "articles/0f07c28090abf9ac0d263bf4473ba9a6.jpg",
-            "articles/14b95ab56656af06d7a69ab2d9ee44d0.jpg",
-            "articles/5c542819963e653209f118071a79567b.jpg",
-            "articles/83102a01875727a5366e6a6fa9a75445.jpg",
-            "articles/c4700f712d7bef2fade2b494d4d2cd98.jpg",
-            "articles/edebd52c007e82d992ba79ed0df88597.jpg",
-            "articles/9499862906fd402eb6ed9de766d7b289.jpg",
-            "articles/15cd7d442e6e9686d8678f0c1236a01f.jpg",
-            "articles/fa1216c1cf674ce8c25148d240677fed.jpg",
+            "articles/0f07c28090abf9ac0d263bf4473ba9a6.webp",
+            "articles/14b95ab56656af06d7a69ab2d9ee44d0.webp",
+            "articles/5c542819963e653209f118071a79567b.webp",
+            "articles/83102a01875727a5366e6a6fa9a75445.webp",
+            "articles/c4700f712d7bef2fade2b494d4d2cd98.webp",
+            "articles/edebd52c007e82d992ba79ed0df88597.webp",
+            "articles/9499862906fd402eb6ed9de766d7b289.webp",
+            "articles/15cd7d442e6e9686d8678f0c1236a01f.webp",
+            "articles/fa1216c1cf674ce8c25148d240677fed.webp",
         ];
 
         for ($i = 0; $i < 9; $i++) {

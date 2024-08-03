@@ -20,7 +20,7 @@ security:
                 check_path: /api/login
                 # Configuration personnalisée en cas de succès
                 success_handler: App\Security\ApiSecurityController
-#                 success_handler: lexik_jwt_authentication.handler.authentication_success
+                # success_handler: lexik_jwt_authentication.handler.authentication_success
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
         api:
             pattern: ^/api
